@@ -1,5 +1,8 @@
-source $VIMRUNTIME/mswin.vim
-"set settings
+"Enable Ctrl key windows functions
+  "ie. ctrl+c for copy
+  source $VIMRUNTIME/mswin.vim
+
+"Change text editor settings
 set linespace=5
 set laststatus=2
 set nu
@@ -8,100 +11,106 @@ set colorcolumn=0
 set nohlsearch
 set guifont=Fira_Code:h11
 set selection=inclusive
-
-" length of an actual \t character:
 set tabstop=2
-" length to use when editing text (eg. TAB and BS keys)
-" (0 for ‘tabstop’, -1 for ‘shiftwidth’):
 set softtabstop=-1
-" length to use when shifting text (eg. <<, >> and == commands)
-" (0 for ‘tabstop’):
 set shiftwidth=0
-" round indentation to multiples of 'shiftwidth' when shifting text
-" (so that it behaves like Ctrl-D / Ctrl-T):
 set shiftround
-
-" if set, only insert spaces; otherwise insert \t and complete with spaces:
 set expandtab
-
-" reproduce the indentation of the previous line:
 set autoindent
-" keep indentation produced by 'autoindent' if leaving the line blank:
-"set cpoptions+=I
-" try to be smart (increase the indenting level after ‘{’,
-" decrease it after ‘}’, and so on):
-"set smartindent
-" a stricter alternative which works better for the C language:
-"set cindent
-" use language‐specific plugins for indenting (better):
-filetype plugin indent on
-"key remaps--------------------------------------------------
-let mapleader = " "
 
-"No Escape Key
-	imap jf <Esc>
-"Tabs
-	nnoremap tn :tabnew<cr>
-	nnoremap tk :tabnext<cr>
-	nnoremap tj :tabprev<cr>
-	nnoremap th :tabfirst<cr>
-	nnoremap tl :tablast<cr>
-"save 
-	nnoremap <leader>s :w<cr>
-"Close 
-	nnoremap <leader>cc :q<cr>
-"Force Quit
-	nnoremap <leader>cf :q!<cr>
-"Reload 
-	nnoremap <leader>rv :source<Space>$MYVIMRC<cr>
-"Open vimrc
-	nnoremap <leader>ev :tabnew $MYVIMRC<cr>
-"Working with window splits
-	"Split window
-	nnoremap <leader>wv :vs<cr>
-	"Split Horizontal
-	nnoremap <leader>hv :sp<cr>
-
+"Folding
+set foldmethod=indent
 "no backup files
+set noswapfile
 set nobackup
 
+filetype plugin indent on
+
+"key remaps--------------------------------------------------------------------------------------------------------------
+
+  "change <leader> to space 
+  let mapleader = " "
+
+  "j f act as Escape
+    imap jf <Esc>
+    
+  "Tabs
+    nnoremap tn :tabnew<cr>
+    nnoremap tk :tabnext<cr>
+    nnoremap tj :tabprev<cr>
+    nnoremap th :tabfirst<cr>
+    nnoremap tl :tablast<cr>
+
+  "save 
+    nnoremap <leader>s :w<cr>
+
+  "Close 
+    nnoremap <leader>cc :q<cr>
+    
+  "Force Close  
+    nnoremap <leader>fc :q!<cr>
+
+  "Reload 
+    nnoremap <leader>rv :source<Space>$MYVIMRC<cr>
+    
+  "Open vimrc
+    nnoremap <leader>vim :tabnew $MYVIMRC<cr>
+
+  "Working with window splits
+    "Split window
+      nnoremap <leader>vs :vs<cr>
+    "Split Horizontal
+      nnoremap <leader>hs :sp<cr>
+
+  "Move text a line up 
+    nnoremap <A-k> <Up>ddp<Up>
+  "Move textg a line down
+    nnoremap <A-j> ddp
+  
+  "Emmet Remap of ctrl+y+,
+    imap <Space><Tab> <C-y>,
+    
 "Open fullscreen
-"au GUIEnter * simalt ~x
-if exists('g:Gui')
+au GUIEnter * simalt ~x
 
-    " Starts in fullscreen, Maximized should work too (untested)
-    let g:GuiWindowFullScreen=1
-endif
-"Plugins
-"Installed at Users/Bobby/vimfiles
-call plug#begin()
+"Plug
+  "Installed at Users/Bobby/vimfiles
+    call plug#begin()
 
-Plug 'https://github.com/joshdick/onedark.vim'
-Plug 'https://github.com/scrooloose/nerdtree'
-Plug 'https://github.com/mattn/emmet-vim.git'
-Plug 'https://github.com/easymotion/vim-easymotion'
-Plug 'https://github.com/kien/ctrlp.vim'
-Plug 'https://github.com/prettier/vim-prettier'
-Plug 'https://github.com/jreybert/vimagit'
-Plug 'itchyny/lightline.vim' 
-Plug 'https://github.com/itchyny/vim-gitbranch'
-Plug 'https://github.com/tpope/vim-fugitive'
-Plug 'https://github.com/Shougo/deoplete.nvim'
-Plug 'vimlab/split-term.vim'
-" Initialize plugin system
-call plug#end()
+    "Themes & syntax highlightings 
+      Plug 'https://github.com/joshdick/onedark.vim'
+      Plug 'https://github.com/Valloric/MatchTagAlways'
+      Plug 'https://github.com/Raimondi/delimitMate' 
+      Plug 'https://github.com/1995eaton/vim-better-javascript-completion'
+    " utils
+      Plug 'https://github.com/scrooloose/nerdtree'
+      Plug 'https://github.com/mattn/emmet-vim.git'
+      Plug 'https://github.com/easymotion/vim-easymotion'
+      Plug 'https://github.com/kien/ctrlp.vim'
+      Plug 'https://github.com/prettier/vim-prettier'
+      Plug 'itchyny/lightline.vim' 
+      Plug 'vimlab/split-term.vim'
+      Plug 'https://github.com/Yggdroot/indentLine'
+      Plug 'https://github.com/tomtom/tcomment_vim'
+    " Git  
+      Plug 'https://github.com/jreybert/vimagit'
+      Plug 'https://github.com/itchyny/vim-gitbranch'
+      Plug 'https://github.com/tpope/vim-fugitive'
+      Plug 'https://github.com/airblade/vim-gitgutter'
 
-"One dark theme
+    call plug#end()
+
+"One Dark Settings------------------------------ 
 syntax on
 colorscheme onedark
 
-"NERDTree 
+"NERDTree---------------------------------------
 map <leader>N :NERDTreeToggle<CR>
 set autochdir
 let NERDTreeChDirMode=2
 nnoremap <leader>n :NERDTree .<CR>
 
-"Syntastic
+"Syntastic-------------------------------------- 
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
@@ -112,7 +121,6 @@ let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 
 "CtrlP 
-
 let g:ctrlp_cmd = 'CtrlP'
 map <leader>o :CtrlP<CR>
 
@@ -131,8 +139,6 @@ let g:lightline = {
 
 "Open in Browser
 nnoremap <A-b> :! start %<CR>
-"Deoplete 
-let g:deoplete#enable_at_startup = 1
 "CTRLP Open in new tab
 let g:ctrlp_prompt_mappings = {
     \ 'AcceptSelection("e")': ['<2-LeftMouse>'],
@@ -140,3 +146,5 @@ let g:ctrlp_prompt_mappings = {
     \ }
 "terminal open 
 map <leader>t :10Term<CR>
+
+"Emmet------------------------------
