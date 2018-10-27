@@ -17,14 +17,13 @@ set shiftwidth=0
 set shiftround
 set expandtab
 set autoindent
-
 "Folding
-set foldmethod=indent
+"set foldmethod=indent
 "no backup files
 set noswapfile
 set nobackup
-
-filetype plugin indent on
+"set omnifunc = syntaxcomplete#Complete
+filetype plugin on
 
 "key remaps--------------------------------------------------------------------------------------------------------------
 
@@ -40,6 +39,12 @@ filetype plugin indent on
     nnoremap tj :tabprev<cr>
     nnoremap th :tabfirst<cr>
     nnoremap tl :tablast<cr>
+
+  "More movement commands 
+    nnoremap H 0 
+    nnoremap L $
+    nnoremap J 5j
+    nnoremap K 5k
 
   "save 
     nnoremap <leader>s :w<cr>
@@ -68,10 +73,13 @@ filetype plugin indent on
     nnoremap <A-j> ddp
   
   "Emmet Remap of ctrl+y+,
-    imap <Space><Tab> <C-y>,
-    
-"Open fullscreen
-au GUIEnter * simalt ~x
+    " imap <Space><Tab> <C-y>,
+  "Comments
+     nnoremap <leader>/ :TComment<cr>
+
+
+"Python Module 
+let g:python3_host_prog='C:\Users\Bobby\AppData\Local\Programs\Python\Python37\python.exe'
 
 "Plug
   "Installed at Users/Bobby/vimfiles
@@ -81,7 +89,7 @@ au GUIEnter * simalt ~x
       Plug 'https://github.com/joshdick/onedark.vim'
       Plug 'https://github.com/Valloric/MatchTagAlways'
       Plug 'https://github.com/Raimondi/delimitMate' 
-      Plug 'https://github.com/1995eaton/vim-better-javascript-completion'
+       
     " utils
       Plug 'https://github.com/scrooloose/nerdtree'
       Plug 'https://github.com/mattn/emmet-vim.git'
@@ -92,11 +100,17 @@ au GUIEnter * simalt ~x
       Plug 'vimlab/split-term.vim'
       Plug 'https://github.com/Yggdroot/indentLine'
       Plug 'https://github.com/tomtom/tcomment_vim'
+      Plug 'https://github.com/wincent/terminus'
+      Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+      Plug 'junegunn/fzf.vim'
+      Plug 'terryma/vim-multiple-cursors'
+      Plug 'ternjs/tern_for_vim'
     " Git  
       Plug 'https://github.com/jreybert/vimagit'
       Plug 'https://github.com/itchyny/vim-gitbranch'
       Plug 'https://github.com/tpope/vim-fugitive'
       Plug 'https://github.com/airblade/vim-gitgutter'
+
 
     call plug#end()
 
@@ -105,10 +119,10 @@ syntax on
 colorscheme onedark
 
 "NERDTree---------------------------------------
-map <leader>N :NERDTreeToggle<CR>
+map <leader>n :NERDTreeToggle<CR>
 set autochdir
 let NERDTreeChDirMode=2
-nnoremap <leader>n :NERDTree .<CR>
+nnoremap <leader>N :NERDTree .<CR>
 
 "Syntastic-------------------------------------- 
 set statusline+=%#warningmsg#
@@ -123,28 +137,30 @@ let g:syntastic_check_on_wq = 0
 "CtrlP 
 let g:ctrlp_cmd = 'CtrlP'
 map <leader>o :CtrlP<CR>
+let g:ctrlp_working_path_mode =  0
 
 "Vim Airline
 "let g:airline#extensions#tabline#enabled = 1
 let g:lightline = {
-      \ 'colorscheme': 'wombat',
-      \ 'active': {
-      \   'left': [ [ 'mode', 'paste' ],
-      \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
-      \ },
-      \ 'component_function': {
-      \   'gitbranch': 'fugitive#head'
-      \ },
-      \ }
+     \ 'colorscheme': 'wombat',
+     \ 'active': {
+     \   'left': [ [ 'mode', 'paste' ],
+     \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
+     \ },
+     \ 'component_function': {
+     \   'gitbranch': 'fugitive#head'
+     \ },
+     \ }
 
 "Open in Browser
 nnoremap <A-b> :! start %<CR>
 "CTRLP Open in new tab
 let g:ctrlp_prompt_mappings = {
-    \ 'AcceptSelection("e")': ['<2-LeftMouse>'],
-    \ 'AcceptSelection("t")': ['<cr>'],
-    \ }
+   \ 'AcceptSelection("e")': ['<2-LeftMouse>'],
+   \ 'AcceptSelection("t")': ['<cr>'],
+   \ }
 "terminal open 
 map <leader>t :10Term<CR>
 
 "Emmet------------------------------
+
