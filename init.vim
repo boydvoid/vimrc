@@ -104,8 +104,16 @@ let g:python3_host_prog='C:\Users\Bobby\AppData\Local\Programs\Python\Python37\p
       Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
       Plug 'junegunn/fzf.vim'
       Plug 'terryma/vim-multiple-cursors'
-      Plug 'ternjs/tern_for_vim'
-    " Git  
+
+      "Deoplete and Linting
+      Plug 'https://github.com/Shougo/deoplete.nvim'
+      Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
+      Plug 'wokalski/autocomplete-flow'
+      Plug 'Shougo/neosnippet'
+      Plug 'Shougo/neosnippet-snippets' 
+      "Linting
+       Plug 'w0rp/ale'
+       " Git  
       Plug 'https://github.com/jreybert/vimagit'
       Plug 'https://github.com/itchyny/vim-gitbranch'
       Plug 'https://github.com/tpope/vim-fugitive'
@@ -123,16 +131,17 @@ map <leader>n :NERDTreeToggle<CR>
 set autochdir
 let NERDTreeChDirMode=2
 nnoremap <leader>N :NERDTree .<CR>
-
+let NERDTreeShowHidden=1
 "Syntastic-------------------------------------- 
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
+" set statusline+=%#warningmsg#
+" set statusline+=%{SyntasticStatuslineFlag()}
+" set statusline+=%*
+" let g:syntastic_always_populate_loc_list = 1
+" let g:syntastic_auto_loc_list = 1
+" let g:syntastic_check_on_open = 1
+" let g:syntastic_check_on_wq = 0
+" let g:syntastic_javascript_checkers = ['eslint']
+" let g:syntastic_javascript_eslint_exe = 'npm run lint --'
 
 "CtrlP 
 let g:ctrlp_cmd = 'CtrlP'
@@ -162,5 +171,14 @@ let g:ctrlp_prompt_mappings = {
 "terminal open 
 map <leader>t :10Term<CR>
 
-"Emmet------------------------------
-
+"Deoplete------------------------------
+" let g:deoplete#enable_at_startup = 1
+" neosnippet
+" let g:neosnippet#enable_completed_snippet = 1"
+"
+"JShint and ALE
+let g:ale_fixers = {
+  \ 'javascript': ['eslint']
+  \ }
+let b:ale_linters = ['eslint']
+let b:ale_fix_on_save = 1
