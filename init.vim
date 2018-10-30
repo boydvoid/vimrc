@@ -172,9 +172,9 @@ let g:ctrlp_prompt_mappings = {
 map <leader>t :10Term<CR>
 
 "Deoplete------------------------------
-" let g:deoplete#enable_at_startup = 1
+  " let g:deoplete#enable_at_startup = 1
 " neosnippet
-" let g:neosnippet#enable_completed_snippet = 1"
+"  let g:neosnippet#enable_completed_snippet = 1"
 "
 "JShint and ALE
 let g:ale_fixers = {
