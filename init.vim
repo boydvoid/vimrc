@@ -3,30 +3,31 @@
   source $VIMRUNTIME/mswin.vim
 
 "Change text editor settings
-set linespace=5
-set laststatus=2
-set nu
-set rnu 
-set colorcolumn=0
-set nohlsearch
-set guifont=Fira_Code:h11
-set selection=inclusive
-set tabstop=2
-set softtabstop=-1
-set shiftwidth=0
-set shiftround
-set expandtab
-set autoindent
+  set linespace=5
+  set laststatus=2
+  set nu
+  set rnu 
+  set colorcolumn=0
+  set nohlsearch
+  set guifont=Fira_Code:h11
+  set selection=inclusive
+  set tabstop=2
+  set softtabstop=-1
+  set shiftwidth=0
+  set shiftround
+  set expandtab
+  set autoindent
+  set smartindent
+  set textwidth=80
 "Folding
-"set foldmethod=indent
-"no backup files
-set noswapfile
-set nobackup
-"set omnifunc = syntaxcomplete#Complete
-filetype plugin on
+  " set foldmethod=indent
+  set noswapfile
+  set nobackup
+  filetype plugin indent on
+" auto indent html on save
+    autocmd BufWritePre *.html :normal migg=G`i
 
-"key remaps--------------------------------------------------------------------------------------------------------------
-
+"Key remaps--------------------------------------------------------------------------------------------------------------
   "change <leader> to space 
   let mapleader = " "
 
@@ -73,25 +74,29 @@ filetype plugin on
     nnoremap <A-j> ddp
   
   "Emmet Remap of ctrl+y+,
-    " imap <Space><Tab> <C-y>,
+     imap <C-y> <C-y>,
   "Comments
      nnoremap <leader>/ :TComment<cr>
-
+  "ALE
 
 "Python Module 
-let g:python3_host_prog='C:\Users\Bobby\AppData\Local\Programs\Python\Python37\python.exe'
+ let g:python3_host_prog='C:\Users\Bobby\AppData\Local\Programs\Python\Python37\python.exe'
 
-"Plug
-  "Installed at Users/Bobby/vimfiles
+"plug
+  "installed at users/bobby/vimfiles
     call plug#begin()
 
-    "Themes & syntax highlightings 
+"themes & syntax highlightings 
+    "one dark theme
       Plug 'https://github.com/joshdick/onedark.vim'
+      Plug 'https://github.com/rakr/vim-one'
+    "match tag
       Plug 'https://github.com/Valloric/MatchTagAlways'
       Plug 'https://github.com/Raimondi/delimitMate' 
        
-    " utils
+" utils
       Plug 'https://github.com/scrooloose/nerdtree'
+      Plug 'ryanoasis/vim-devicons'
       Plug 'https://github.com/mattn/emmet-vim.git'
       Plug 'https://github.com/easymotion/vim-easymotion'
       Plug 'https://github.com/kien/ctrlp.vim'
@@ -100,41 +105,45 @@ let g:python3_host_prog='C:\Users\Bobby\AppData\Local\Programs\Python\Python37\p
       Plug 'vimlab/split-term.vim'
       Plug 'https://github.com/Yggdroot/indentLine'
       Plug 'https://github.com/tomtom/tcomment_vim'
-      Plug 'https://github.com/wincent/terminus'
-      Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-      Plug 'junegunn/fzf.vim'
       Plug 'terryma/vim-multiple-cursors'
-
-      "Deoplete and Linting
+      Plug 'maksimr/vim-jsbeautify'
+      
+    "deoplete and linting
       Plug 'https://github.com/Shougo/deoplete.nvim'
       Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
-      Plug 'wokalski/autocomplete-flow'
       Plug 'Shougo/neosnippet'
       Plug 'Shougo/neosnippet-snippets' 
-      "Linting
+      
+    "linting
        Plug 'w0rp/ale'
-       " Git  
-      Plug 'https://github.com/jreybert/vimagit'
-      Plug 'https://github.com/itchyny/vim-gitbranch'
-      Plug 'https://github.com/tpope/vim-fugitive'
-      Plug 'https://github.com/airblade/vim-gitgutter'
+
+    " git  
+        Plug 'https://github.com/jreybert/vimagit'
+        Plug 'https://github.com/itchyny/vim-gitbranch'
+        Plug 'https://github.com/tpope/vim-fugitive'
+        Plug 'https://github.com/airblade/vim-gitgutter'
 
 
     call plug#end()
 
-"One Dark Settings------------------------------ 
+"one dark settings------------------------------ 
 syntax on
 colorscheme onedark
 
-"NERDTree---------------------------------------
-map <leader>n :NERDTreeToggle<CR>
+"nerdtree---------------------------------------
+map <leader>n :NERDTreeToggle<cr>
 set autochdir
-let NERDTreeChDirMode=2
-nnoremap <leader>N :NERDTree .<CR>
-let NERDTreeShowHidden=1
-"Syntastic-------------------------------------- 
+let nerdtreechdirmode=2
+nnoremap <leader>N :NERDTree .<cr>
+let nerdtreeshowhidden=1
+"auto delete the buffer of file deleted in nerdtree
+let nerdtreeautodeletebuffer = 1
+let nerdtreeminimalui = 1
+let nerdtreedirarrows = 1
+let NERDTreeShowHidden =1 
+"syntastic-------------------------------------- 
 " set statusline+=%#warningmsg#
-" set statusline+=%{SyntasticStatuslineFlag()}
+" set statusline+=%{syntasticstatuslineflag()}
 " set statusline+=%*
 " let g:syntastic_always_populate_loc_list = 1
 " let g:syntastic_auto_loc_list = 1
@@ -143,12 +152,12 @@ let NERDTreeShowHidden=1
 " let g:syntastic_javascript_checkers = ['eslint']
 " let g:syntastic_javascript_eslint_exe = 'npm run lint --'
 
-"CtrlP 
-let g:ctrlp_cmd = 'CtrlP'
-map <leader>o :CtrlP<CR>
+"ctrlp 
+let g:ctrlp_cmd = 'ctrlp'
+map <leader>o :CtrlP<cr>
 let g:ctrlp_working_path_mode =  0
 
-"Vim Airline
+"vim airline
 "let g:airline#extensions#tabline#enabled = 1
 let g:lightline = {
      \ 'colorscheme': 'wombat',
@@ -161,24 +170,27 @@ let g:lightline = {
      \ },
      \ }
 
-"Open in Browser
-nnoremap <A-b> :! start %<CR>
-"CTRLP Open in new tab
+"open in browser-------------------------------------|
+nnoremap <a-b> :! start %<cr>
+"ctrlp open in new tab
 let g:ctrlp_prompt_mappings = {
-   \ 'AcceptSelection("e")': ['<2-LeftMouse>'],
-   \ 'AcceptSelection("t")': ['<cr>'],
+   \ 'acceptselection("e")': ['<2-leftmouse>'],
+   \ 'acceptselection("t")': ['<cr>'],
    \ }
 "terminal open 
-map <leader>t :10Term<CR>
+  map <leader>t :10Term<cr>
 
-"Deoplete------------------------------
-  " let g:deoplete#enable_at_startup = 1
+"deoplete---------------------------------------------|
+   let g:deoplete#enable_at_startup = 1
 " neosnippet
-"  let g:neosnippet#enable_completed_snippet = 1"
-"
-"JShint and ALE
-let g:ale_fixers = {
-  \ 'javascript': ['eslint']
-  \ }
-let b:ale_linters = ['eslint']
-let b:ale_fix_on_save = 1
+  let g:neosnippet#enable_completed_snippet = 1"
+  let g:deoplete#sources#ternjs#tern_bin = 'C:\Users\Bobby\AppData\Roaming\npm\node_modules\tern\bin\tern'
+  
+  
+"Eslint and ALE---------------------------------------| 
+    let g:ale_fixers = {
+    \ 'javascript': ['eslint']
+    \ }
+  let b:ale_linters = ['eslint']
+  let b:ale_fix_on_save = 1
+  autocmd BufWritePre *.{js,jsx} ALEFix
