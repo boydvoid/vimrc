@@ -1,196 +1,110 @@
-"Enable Ctrl key windows functions
-  "ie. ctrl+c for copy
-  source $VIMRUNTIME/mswin.vim
+set nocompatible 
 
-"Change text editor settings
-  set linespace=5
-  set laststatus=2
-  set nu
-  set rnu 
-  set colorcolumn=0
-  set nohlsearch
-  set guifont=Fira_Code:h11
-  set selection=inclusive
-  set tabstop=2
-  set softtabstop=-1
-  set shiftwidth=0
-  set shiftround
-  set expandtab
-  set autoindent
-  set smartindent
-  set textwidth=80
-"Folding
-  " set foldmethod=indent
-  set noswapfile
-  set nobackup
-  filetype plugin indent on
-" auto indent html on save
-    autocmd BufWritePre *.html :normal migg=G`i
+filetype off
+source $VIMRUNTIME/mswin.vim
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+Plugin 'VundleVim/Vundle.vim'
 
-"Key remaps--------------------------------------------------------------------------------------------------------------
-  "change <leader> to space 
-  let mapleader = " "
+Plugin 'drewtempelmeyer/palenight.vim'
+Plugin 'https://github.com/scrooloose/nerdtree.git'
+Plugin 'https://github.com/itchyny/lightline.vim.git'
+Plugin 'https://github.com/kien/ctrlp.vim.git'
+Plugin 'w0rp/ale'
+Plugin 'https://github.com/jreybert/vimagit'
+Plugin 'https://github.com/jreybert/vim-gitbranch'
+Plugin 'https://github.com/tpope/vim-fugitive'
+Plugin 'https://github.com/airblade/vim-gitgutter'
+Plugin 'leafgarland/typescript-vim'
+Plugin 'peitalin/vim-jsx-typescript'
+Plugin 'mattn/emmet-vim'
+Plugin 'scrooloose/nerdcommenter'
+Plugin 'prettier/vim-prettier', { 'do': 'npm install' }
+call vundle#end()
 
-  "j f act as Escape
-    imap jf <Esc>
-    
-  "Tabs
-    nnoremap tn :tabnew<cr>
-    nnoremap tk :tabnext<cr>
-    nnoremap tj :tabprev<cr>
-    nnoremap th :tabfirst<cr>
-    nnoremap tl :tablast<cr>
+filetype plugin indent on
 
-  "More movement commands 
-    nnoremap H 0 
-    nnoremap L $
-    nnoremap J 5j
-    nnoremap K 5k
+" Text editor settings
+set rnu
+set nu
+set nohlsearch
+set background=dark
+colorscheme palenight
+set selection=inclusive
+set ignorecase
+set autoindent
+set smartindent
+set laststatus=2
+set noswapfile
+set encoding=UTF-8
+set guifont=Fira_Code:h10:cANSI:qDRAFT
+" Key Remap0
 
-  "save 
-    nnoremap <leader>s :w<cr>
+let mapleader = " " 
+imap ;; <Esc>
 
-  "Close 
-    nnoremap <leader>cc :q<cr>
-    
-  "Force Close  
-    nnoremap <leader>fc :q!<cr>
-
-  "Reload 
-    nnoremap <leader>rv :source<Space>$MYVIMRC<cr>
-    
-  "Open vimrc
-    nnoremap <leader>vim :tabnew $MYVIMRC<cr>
-
-  "Working with window splits
-    "Split window
-      nnoremap <leader>vs :vs<cr>
-    "Split Horizontal
-      nnoremap <leader>hs :sp<cr>
-
-  "Move text a line up 
-    nnoremap <A-k> <Up>ddp<Up>
-  "Move textg a line down
-    nnoremap <A-j> ddp
-  
-  "Emmet Remap of ctrl+y+,
-     imap <C-y> <C-y>,
-  "Comments
-     nnoremap <leader>/ :TComment<cr>
-  "ALE
-
-"Python Module 
- let g:python3_host_prog='C:\Users\Bobby\AppData\Local\Programs\Python\Python37\python.exe'
-
-"plug
-  "installed at users/bobby/vimfiles
-    call plug#begin()
-
-"themes & syntax highlightings 
-    "one dark theme
-      Plug 'https://github.com/joshdick/onedark.vim'
-      Plug 'https://github.com/rakr/vim-one'
-    "match tag
-      Plug 'https://github.com/Valloric/MatchTagAlways'
-      Plug 'https://github.com/Raimondi/delimitMate' 
-       
-" utils
-      Plug 'https://github.com/scrooloose/nerdtree'
-      Plug 'ryanoasis/vim-devicons'
-      Plug 'https://github.com/mattn/emmet-vim.git'
-      Plug 'https://github.com/easymotion/vim-easymotion'
-      Plug 'https://github.com/kien/ctrlp.vim'
-      Plug 'https://github.com/prettier/vim-prettier'
-      Plug 'itchyny/lightline.vim' 
-      Plug 'vimlab/split-term.vim'
-      Plug 'https://github.com/Yggdroot/indentLine'
-      Plug 'https://github.com/tomtom/tcomment_vim'
-      Plug 'terryma/vim-multiple-cursors'
-      Plug 'maksimr/vim-jsbeautify'
-      
-    "deoplete and linting
-      Plug 'https://github.com/Shougo/deoplete.nvim'
-      Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
-      Plug 'Shougo/neosnippet'
-      Plug 'Shougo/neosnippet-snippets' 
-      
-    "linting
-       Plug 'w0rp/ale'
-
-    " git  
-        Plug 'https://github.com/jreybert/vimagit'
-        Plug 'https://github.com/itchyny/vim-gitbranch'
-        Plug 'https://github.com/tpope/vim-fugitive'
-        Plug 'https://github.com/airblade/vim-gitgutter'
+nnoremap <leader>tn :tabnew<cr>
+nnoremap <leader>tk :tabnext<cr>
+nnoremap <leader>tj :tabprev<cr>
+nnoremap <leader>th :tabfirst<cr>
+nnoremap <leader>tl :tablast<cr>
+nnoremap <leader>s :w<cr>
 
 
-    call plug#end()
 
-"one dark settings------------------------------ 
-syntax on
-colorscheme onedark
+"more movement keys
+	nnoremap H 0
+	nnoremap L $
+	nnoremap J 5j 
+	nnoremap K 5k
 
-"nerdtree---------------------------------------
-map <leader>n :NERDTreeToggle<cr>
+"Close
+	nnoremap <leader>wd :q!<cr>
+"Reload
+	nnoremap <leader>rv :source<Space>$MYVIMRC<cr>
+"Open vimrc
+	nnoremap <leader>vim :tabnew $MYVIMRC<cr>
+"splits
+	nnoremap <leader>w/ :vs<cr>
+	nnoremap <leader>w- :sp<cr>
+	nnoremap <leader>wl <C-w>l<cr>
+	nnoremap <leader>wh <C-w>h<cr>
+	nnoremap <leader>wj <C-w>j<cr>
+	nnoremap <leader>wk <C-w>k<cr>
+	"mnemonic window full screen horizontal split
+	nnoremap <leader>wrh <C-w>_<cr>
+	"mnemonic window resize vertical split
+	nnoremap <leader>wrv :vertical resize +50<cr>
+	nnoremap <leader>wre <C-w>=<cr>
+"move text up 
+	nnoremap <A-k> <Up>ddp<Up>
+"move text down 
+	nnoremap <A-j> ddp
+
+	
+"nerdTree
+map <leader>ft :NERDTreeToggle<cr>
+nnoremap <leader>FT :NERDTree .<cr>
 set autochdir
-let nerdtreechdirmode=2
-nnoremap <leader>N :NERDTree .<cr>
 let nerdtreeshowhidden=1
-"auto delete the buffer of file deleted in nerdtree
-let nerdtreeautodeletebuffer = 1
-let nerdtreeminimalui = 1
-let nerdtreedirarrows = 1
-let NERDTreeShowHidden =1 
-"syntastic-------------------------------------- 
-" set statusline+=%#warningmsg#
-" set statusline+=%{syntasticstatuslineflag()}
-" set statusline+=%*
-" let g:syntastic_always_populate_loc_list = 1
-" let g:syntastic_auto_loc_list = 1
-" let g:syntastic_check_on_open = 1
-" let g:syntastic_check_on_wq = 0
-" let g:syntastic_javascript_checkers = ['eslint']
-" let g:syntastic_javascript_eslint_exe = 'npm run lint --'
 
-"ctrlp 
-let g:ctrlp_cmd = 'ctrlp'
-map <leader>o :CtrlP<cr>
-let g:ctrlp_working_path_mode =  0
+syntax on
 
-"vim airline
-"let g:airline#extensions#tabline#enabled = 1
+ set noswapfile
+  set nobackup
+
+"CTRlP
+let g:ctrlp_cmd = 'CtrlP'
+
 let g:lightline = {
-     \ 'colorscheme': 'wombat',
-     \ 'active': {
-     \   'left': [ [ 'mode', 'paste' ],
-     \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
-     \ },
-     \ 'component_function': {
-     \   'gitbranch': 'fugitive#head'
-     \ },
-     \ }
+	\ 'active': {
+	\	'left': [ [ 'mode' , 'paste' ],
+	\		  [ 'gitbranch', 'readonly', 'filename', 'modified']]
+	\ },
+	\ 'component_function': {
+	\ 	'gitbranch': 'fugitive#head'
+	\ },
+	\ }
 
-"open in browser-------------------------------------|
-nnoremap <a-b> :! start %<cr>
-"ctrlp open in new tab
-let g:ctrlp_prompt_mappings = {
-   \ 'acceptselection("e")': ['<2-leftmouse>'],
-   \ 'acceptselection("t")': ['<cr>'],
-   \ }
-"terminal open 
-  map <leader>t :10Term<cr>
+imap <expr><tab> emmet#expandAbbrIntelligent("\<tab>")"
 
-"deoplete---------------------------------------------|
-   let g:deoplete#enable_at_startup = 1
-" neosnippet
-  let g:neosnippet#enable_completed_snippet = 1"
-  let g:deoplete#sources#ternjs#tern_bin = 'C:\Users\Bobby\AppData\Roaming\npm\node_modules\tern\bin\tern'
-  
-  
-"Eslint and ALE---------------------------------------| 
-    let g:ale_fixers = {
-    \ 'javascript': ['eslint']
-    \ }
-  let b:ale_linters = ['eslint']
-  let b:ale_fix_on_save = 1
-  autocmd BufWritePre *.{js,jsx} ALEFix
