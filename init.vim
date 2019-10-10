@@ -18,13 +18,20 @@ Plugin 'https://github.com/airblade/vim-gitgutter'
 Plugin 'leafgarland/typescript-vim'
 Plugin 'peitalin/vim-jsx-typescript'
 Plugin 'mattn/emmet-vim'
+Plugin 'mhinz/vim-startify'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'prettier/vim-prettier', { 'do': 'npm install' }
+Plugin 'https://github.com/Raimondi/delimitMate'
+Plugin 'junegunn/goyo.vim'
+Plugin 'junegunn/limelight.vim'
 call vundle#end()
 
 filetype plugin indent on
 
 " Text editor settings
+set tabstop=2 
+set expandtab
+set shiftwidth=2
 set rnu
 set nu
 set nohlsearch
@@ -80,7 +87,8 @@ nnoremap <leader>s :w<cr>
 	nnoremap <A-k> <Up>ddp<Up>
 "move text down 
 	nnoremap <A-j> ddp
-
+"Goyo centering and limelight toggle
+  nnoremap <Leader>wc :Goyo<cr>
 	
 "nerdTree
 map <leader>ft :NERDTreeToggle<cr>
@@ -108,3 +116,20 @@ let g:lightline = {
 
 imap <expr><tab> emmet#expandAbbrIntelligent("\<tab>")"
 
+"let g:startify_custom_header = [
+"\'____        _     _        __      ___           ',
+"\' |  _ \      | |   | |       \ \    / (_)         ', 
+"\' | |_) | ___ | |__ | |__  _   \ \  / / _ _ __ ___  ',
+ "\'|  _ < / _ \| '_ \| '_ \| | | \ \/ / | | '_ ` _ \ ',
+ "\'| |_) | (_) | |_) | |_) | |_| |\  /  | | | | | | |',
+ "\'|____/ \___/|_.__/|_.__/ \__, | \/   |_|_| |_| |_|',
+ "\'                          __/ |                   ',
+  "\'                        |___/                    ',
+"]
+"
+"Goyo and Limelight Together 
+autocmd! User GoyoEnter Limelight
+autocmd! User GoyoLeave Limelight!
+
+autocmd User GoyoEnter set rnu
+autocmd! User GoyoLeave set rnu
