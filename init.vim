@@ -42,7 +42,6 @@ Plugin 'junegunn/goyo.vim'
 Plugin 'junegunn/limelight.vim'
 Plugin 'jceb/vim-orgmode'
 Plugin 'tmhedberg/SimpylFold'
-Plugin 'Valloric/YouCompleteMe', { 'do': './install.py --tern-completer' }
 Plugin 'easymotion/vim-easymotion'
 Plugin 'jbgutierrez/vim-better-comments'
 Plugin 'Yggdroot/indentLine'
@@ -52,6 +51,7 @@ Plugin 'rakr/vim-one'
 Plugin 'arcticicestudio/nord-vim'
 Plugin 'MattesGroeger/vim-bookmarks'
 Plugin 'terryma/vim-smooth-scroll'
+Plugin 'terryma/vim-multiple-cursors'
 
 call vundle#end()
 
@@ -73,7 +73,8 @@ filetype plugin indent on
   set laststatus=2
   set noswapfile
   set encoding=UTF-8
-  Guifont Fira Code:h11
+  "open splits normally
+    set splitbelow splitright
   noremap <silent> <c-u> :call smooth_scroll#up(&scroll, 3, 7)<CR>
   noremap <silent> <c-d> :call smooth_scroll#down(&scroll, 3, 7)<CR>
   noremap <silent> <c-b> :call smooth_scroll#up(&scroll*2, 3, 7)<CR>
@@ -127,6 +128,9 @@ nnoremap <leader>s :w<cr>
 "Goyo centering and limelight toggle
  nnoremap <leader>wc :Goyo<cr>
 	
+ " Better Searching
+    nnoremap <leader>r :%s//g<Left><Left>
+    
 "Folding 
 "Enable Folding wit Leader Tab
   nnoremap <leader>fc za :echo 'Close fold'<cr>
@@ -135,7 +139,10 @@ nnoremap <leader>s :w<cr>
   nnoremap <leader>fO zR :echo 'Open all folds'<cr>
   nnoremap <leader>fn zj :echo 'Next fold'<cr>
   nnoremap <leader>fp zk :echo 'Previous fold'<cr>
-"nerdTree
+
+"Limelight Toggle
+  nnoremap <leader>llt :Limelight!!<cr>
+" nerdTree
 map <leader>ft :NERDTreeToggle<cr>
 
 "Change Bookmark Plugin
@@ -170,16 +177,19 @@ let g:lightline = {
 
 imap <expr><tab> emmet#expandAbbrIntelligent("\<tab>")"
 
-"let g:startify_custom_header = [
-  "\'____        _     _        __      ___           ',
-"\' |  _ \      | |   | |       \ \    / (_)         ', 
-"\' | |_) | ___ | |__ | |__  _   \ \  / / _ _ __ ___  ',
- "\'|  _ < / _ \| '_ \| '_ \| | | \ \/ / | | '_ ` _ \ ',
- "\'| |_) | (_) | |_) | |_) | |_| |\  /  | | | | | | |',
- "\'|____/ \___/|_.__/|_.__/ \__, | \/   |_|_| |_| |_|',
- "\'                          __/ |                   ',
-  "\'                        |___/                    ',
-"]
+let g:startify_custom_header = [
+\'  ____        _     _        __      ___           ',
+\' |  _ \      | |   | |       \ \    / (_)          ', 
+\' | |_) | ___ | |__ | |__  _   \ \  / / _ _ __ ___  ',
+\' |  _ < / _ \| |_ \| |_ \| | | \ \/ / | | |_ | _ \ ',
+\' | |_) | (_) | |_) | |_) | |_| |\  /  | | | | | | |',
+\' |____/ \___/|_.__/|_.__/ \__, | \/   |_|_| |_| |_|',
+\'                          __/ |                    ',
+\'                         |___/                     ',
+\]
+
+let g:startify_bookmarks = [ {'c': 'c:/Users/BOYDRX/Documents/git/Cleaver'},  {'m': 'c:/Users/BOYDRX/Documents/git/Matterhorn'}]
+
 
 "Goyo and Limelight Together 
   autocmd! User GoyoEnter Limelight
@@ -188,14 +198,14 @@ imap <expr><tab> emmet#expandAbbrIntelligent("\<tab>")"
   autocmd! User GoyoLeave set rnu
 
 
-" Python integration
-let g:python3_host_prog='C:\Users\BOYDRX\AppData\Local\Programs\Python\Python37\python.exe'
-
 " Enable folding
 set foldmethod=indent   
 set foldnestmax=10
 set nofoldenable
 set foldlevel=2
+
+" autocomplete
+  set wildmode=longest,list,full
 
 let g:SimpylFold_docstring_preview = 1
 
@@ -205,3 +215,17 @@ let g:SimpylFold_docstring_preview = 1
 
   nnoremap <silent> <leader>= :Bigger<cr>
   nnoremap <silent> <leader>- :Smaller<cr>
+
+" Disables automatic commenting on newline
+  autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+
+
+if exists('g:GuiLoaded')
+
+GuiTabline 0
+
+GuiPopupmenu 0
+
+GuiFont! Fira Code:h11
+
+endif
